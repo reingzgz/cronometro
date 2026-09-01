@@ -29,29 +29,29 @@
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
-  body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:15px;
-       line-height:1.45;-webkit-font-smoothing:antialiased;padding:18px 16px 40px}
-  .wrap{max-width:1180px;margin:0 auto}
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:14px;
+       line-height:1.4;-webkit-font-smoothing:antialiased;padding:10px 12px 14px}
+  .wrap{max-width:1400px;margin:0 auto}
 
-  .top{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px}
-  .brand h1{font-family:var(--cond);font-weight:700;font-size:26px;letter-spacing:.06em;
+  .top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+  .brand h1{font-family:var(--cond);font-weight:700;font-size:19px;letter-spacing:.06em;
             text-transform:uppercase;margin:0;line-height:1}
-  .brand p{margin:4px 0 0;color:var(--ink-2);font-size:13px}
+  .brand p{margin:2px 0 0;color:var(--ink-2);font-size:11.5px}
   .brand p b{color:var(--caja)}
   .counters{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap}
   .counter{background:var(--panel);border:1px solid var(--line);border-radius:3px;
-           padding:6px 12px;min-width:84px;box-shadow:var(--shadow)}
-  .counter span{display:block;font-family:var(--cond);font-size:11px;letter-spacing:.12em;
+           padding:3px 9px;min-width:66px;box-shadow:var(--shadow)}
+  .counter span{display:block;font-family:var(--cond);font-size:9.5px;letter-spacing:.1em;
                 text-transform:uppercase;color:var(--ink-2)}
-  .counter strong{font-family:var(--mono);font-size:19px;font-weight:700;letter-spacing:-.02em}
+  .counter strong{font-family:var(--mono);font-size:15px;font-weight:700;letter-spacing:-.02em}
   .save{display:flex;flex-direction:column;justify-content:center;gap:3px;padding-left:4px}
   .save small{font-family:var(--mono);font-size:10.5px;color:var(--ink-2);text-align:center}
 
   /* pestanas */
-  .tabs{display:flex;gap:2px;margin-bottom:14px;border-bottom:2px solid var(--line)}
-  .tab{font-family:var(--cond);font-weight:600;font-size:15px;letter-spacing:.08em;text-transform:uppercase;
+  .tabs{display:flex;gap:2px;margin-bottom:9px;border-bottom:2px solid var(--line)}
+  .tab{font-family:var(--cond);font-weight:600;font-size:13.5px;letter-spacing:.06em;text-transform:uppercase;
        background:transparent;border:0;border-bottom:3px solid transparent;margin-bottom:-2px;
-       padding:9px 18px;cursor:pointer;color:var(--ink-2)}
+       padding:6px 13px;cursor:pointer;color:var(--ink-2)}
   .tab:hover{color:var(--ink)}
   .tab.on{color:var(--ink);border-bottom-color:var(--run)}
   .tab:focus-visible{outline:3px solid var(--caja);outline-offset:-3px}
@@ -59,40 +59,58 @@
   .vista.on{display:block}
 
   .grid{display:grid;grid-template-columns:1fr 300px;gap:16px;align-items:start}
-  .panel{background:var(--panel);border:1px solid var(--line);border-radius:3px;box-shadow:var(--shadow)}
-  .panel-h{font-family:var(--cond);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
-           color:var(--ink-2);padding:10px 14px;border-bottom:1px solid var(--line-2);
-           display:flex;justify-content:space-between;align-items:center;gap:10px}
 
-  .clock{padding:20px 22px 22px;border-left:5px solid var(--run);position:relative}
+  /* ===== pantalla de medicion: dos columnas que caben en un portatil ===== */
+  .cronoGrid{display:grid;grid-template-columns:minmax(320px,0.8fr) 1.2fr;gap:10px;align-items:start}
+  .colIzq,.colDer{min-width:0}
+  .colDer{display:flex;flex-direction:column;gap:10px}
+  #panelTareas{display:flex;flex-direction:column;min-height:0}
+  #tareas,#chips{overflow:auto}
+  #panelLog{display:flex;flex-direction:column;min-height:0}
+  #panelLog .log{flex:1;min-height:120px}
+  /* si la pantalla es alta, encajar todo sin scroll de pagina */
+  @media (min-height:620px) and (min-width:1000px){
+    .cronoGrid{height:calc(100vh - 118px)}
+    .colIzq{height:100%;overflow:auto}
+    .colDer{height:100%;min-height:0}
+    #panelTareas{flex:1}
+    #panelLog{height:190px;flex:none}
+    #panelLog .log{max-height:none}
+  }
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:3px;box-shadow:var(--shadow)}
+  .panel-h{font-family:var(--cond);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+           color:var(--ink-2);padding:7px 11px;border-bottom:1px solid var(--line-2);
+           display:flex;justify-content:space-between;align-items:center;gap:10px;flex:none}
+
+  .clock{padding:11px 14px 13px;border-left:4px solid var(--run);position:relative}
   .clock.idle{border-left-color:var(--line)}
   .clock.paused{border-left-color:var(--ink-2)}
   .eyebrow{font-family:var(--cond);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
-  .step-now{display:flex;align-items:baseline;gap:12px;margin:2px 0 6px;flex-wrap:wrap}
-  .step-num{font-family:var(--mono);font-weight:700;font-size:22px;color:var(--run)}
-  .step-name{font-family:var(--cond);font-weight:600;font-size:clamp(21px,3.2vw,33px);
+  .step-now{display:flex;align-items:baseline;gap:8px;margin:1px 0 3px;flex-wrap:wrap}
+  .step-num{font-family:var(--mono);font-weight:700;font-size:16px;color:var(--run)}
+  .step-name{font-family:var(--cond);font-weight:600;font-size:clamp(16px,2.1vw,24px);
              letter-spacing:.01em;text-transform:uppercase;line-height:1.05}
   .tag{font-family:var(--cond);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
        padding:2px 7px;border-radius:2px;white-space:nowrap}
   .tag.bucle{background:var(--run-soft);color:var(--run)}
   .tag.inicio,.tag.cierre{background:var(--caja-soft);color:var(--caja)}
   .readout{font-family:var(--mono);font-weight:700;font-variant-numeric:tabular-nums;
-           font-size:clamp(56px,13vw,104px);line-height:.95;letter-spacing:-.04em;color:var(--run);margin:6px 0 2px}
+           font-size:clamp(34px,5.4vw,58px);line-height:.95;letter-spacing:-.04em;color:var(--run);margin:2px 0 0}
   .clock.idle .readout,.clock.paused .readout{color:var(--ink)}
   .readout .cs{font-size:.5em;color:var(--ink-2);font-weight:500}
-  .next{color:var(--ink-2);font-size:13px;margin-bottom:16px}
+  .next{color:var(--ink-2);font-size:12px;margin:2px 0 8px}
   .next b{color:var(--ink);font-weight:600}
 
   .btn{font-family:var(--cond);font-weight:600;letter-spacing:.08em;text-transform:uppercase;
        border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:3px;
-       padding:10px 14px;font-size:14px;cursor:pointer;
+       padding:7px 11px;font-size:12.5px;cursor:pointer;
        transition:background .12s ease,border-color .12s ease,transform .06s ease}
   .btn:hover{background:#F3F6FA;border-color:var(--ink-2)}
   .btn:active{transform:translateY(1px)}
   .btn:focus-visible{outline:3px solid var(--caja);outline-offset:2px}
   .btn[disabled]{opacity:.4;cursor:not-allowed}
-  .btn-main{width:100%;background:var(--run);border-color:var(--run);color:#fff;font-size:22px;
-            padding:18px 16px;letter-spacing:.1em;display:flex;align-items:center;justify-content:center;gap:12px}
+  .btn-main{width:100%;background:var(--run);border-color:var(--run);color:#fff;font-size:17px;
+            padding:11px 12px;letter-spacing:.08em;display:flex;align-items:center;justify-content:center;gap:10px}
   .btn-main:hover{background:#C9540D;border-color:#C9540D}
   .btn-main kbd,.btn-caja kbd{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:0;
             border:1px solid rgba(255,255,255,.55);border-radius:2px;padding:2px 7px;text-transform:none}
@@ -137,6 +155,7 @@
   .chip.bucle{border-left:3px solid var(--run)}
 
   .log{max-height:430px;overflow:auto}
+  .log-row{padding:5px 11px !important;font-size:11.5px !important}
   .log-row{display:flex;align-items:center;gap:9px;padding:7px 14px;border-bottom:1px solid var(--line-2);
            font-size:12.5px;animation:stamp .22s ease-out}
   @keyframes stamp{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:none}}
@@ -199,24 +218,24 @@
   .aviso b{color:var(--caja)}
 
   /* ---------- panel de runner ---------- */
-  .tareas{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px;padding:12px}
+  .tareas{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:6px;padding:8px}
   .tarea{
-    position:relative;display:flex;flex-direction:column;gap:5px;text-align:left;
+    position:relative;display:flex;flex-direction:column;gap:3px;text-align:left;
     border:1px solid var(--line);background:var(--panel);border-radius:3px;
-    padding:12px 12px 10px;cursor:pointer;font-family:var(--body);color:var(--ink);
-    min-height:74px;transition:border-color .1s ease,background .1s ease,transform .06s ease
+    padding:8px 9px 7px;cursor:pointer;font-family:var(--body);color:var(--ink);
+    min-height:54px;transition:border-color .1s ease,background .1s ease,transform .06s ease
   }
   .tarea:hover{border-color:var(--ink-2);background:#F3F6FA}
   .tarea:active{transform:translateY(1px)}
   .tarea:focus-visible{outline:3px solid var(--caja);outline-offset:2px}
-  .tarea .nm{font-family:var(--cond);font-weight:600;font-size:16px;letter-spacing:.02em;
+  .tarea .nm{font-family:var(--cond);font-weight:600;font-size:13.5px;letter-spacing:.02em;
     text-transform:uppercase;line-height:1.1}
   .tarea .dat{display:flex;justify-content:space-between;align-items:baseline;
-    font-family:var(--mono);font-size:11.5px;color:var(--ink-2)}
+    font-family:var(--mono);font-size:10px;color:var(--ink-2)}
   .tarea .pct{font-weight:700;color:var(--ink)}
   .tarea .sub{height:3px;background:var(--line-2);border-radius:2px;overflow:hidden}
   .tarea .sub i{display:block;height:100%;background:var(--run)}
-  .tarea.on{border-color:var(--run);background:var(--run-soft);border-width:2px;padding:11px 11px 9px}
+  .tarea.on{border-color:var(--run);background:var(--run-soft);border-width:2px;padding:7px 8px 6px}
   .tarea.on .nm{color:var(--run)}
   .tarea.espera{border-left:3px solid var(--caja)}
   .rn-head{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
@@ -225,22 +244,22 @@
   .oculto{display:none !important}
 
   /* ---------- tiempo corrido ---------- */
-  .run{padding:16px 22px 18px;border-top:1px solid var(--line-2)}
+  .run{padding:9px 14px 11px;border-top:1px solid var(--line-2)}
   .run-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
   .run-clock{font-family:var(--mono);font-weight:700;font-variant-numeric:tabular-nums;
-    font-size:34px;letter-spacing:-.03em;color:var(--caja);line-height:1}
+    font-size:23px;letter-spacing:-.03em;color:var(--caja);line-height:1}
   .run-clock.off{color:var(--ink-2)}
-  .bar{display:flex;height:22px;border-radius:2px;overflow:hidden;margin:11px 0 7px;background:var(--line-2)}
+  .bar{display:flex;height:14px;border-radius:2px;overflow:hidden;margin:6px 0 5px;background:var(--line-2)}
   .bar i{display:block;height:100%}
   .bar .asig{background:var(--run)}
   .bar .sin{background:repeating-linear-gradient(45deg,#B9C6D6,#B9C6D6 5px,#CBD5E1 5px,#CBD5E1 10px)}
-  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-2)}
+  .legend{display:flex;gap:12px;flex-wrap:wrap;font-size:11px;color:var(--ink-2)}
   .legend span{display:flex;align-items:center;gap:6px}
   .legend b{font-family:var(--mono);color:var(--ink)}
   .dot{width:10px;height:10px;border-radius:2px;display:inline-block}
   .dot.a{background:var(--run)}
   .dot.s{background:#C3CEDB}
-  .run-row{display:flex;gap:8px;margin-top:11px;flex-wrap:wrap;align-items:flex-end}
+  .run-row{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;align-items:flex-end}
   .run-row .btn{flex:1;min-width:120px}
   .run-field{display:flex;flex-direction:column;gap:3px;min-width:130px}
   .run-field label{font-family:var(--cond);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
@@ -248,7 +267,7 @@
     border-radius:3px;background:#FBFCFE;color:var(--ink);width:100%}
   .btn-ses{background:var(--caja);border-color:var(--caja);color:#fff}
   .btn-ses:hover{background:#223C6E;border-color:#223C6E}
-  .mini{font-size:12px;color:var(--ink-2);margin-top:8px}
+  .mini{font-size:11px;color:var(--ink-2);margin-top:6px}
   .mini b{color:var(--ink)}
   .toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--ink);color:#fff;
          font-size:13.5px;padding:11px 18px;border-radius:3px;box-shadow:0 10px 30px -10px rgba(15,35,56,.6);
@@ -259,6 +278,7 @@
             border-radius:2px;padding:1px 6px}
 
   @media (max-width:1080px){ .rowcols{grid-template-columns:1fr} .ed-top{grid-template-columns:1fr 1fr} }
+  @media (max-width:1000px){ .cronoGrid{grid-template-columns:1fr} }
   @media (max-width:900px){ .grid{grid-template-columns:1fr} .log{max-height:260px} }
   @media (prefers-reduced-motion:reduce){ *{animation:none!important;transition:none!important} }
 </style>
@@ -286,13 +306,16 @@
   <div class="tabs">
     <button class="tab on" id="tabCrono" data-v="crono">Cronómetro</button>
     <button class="tab" id="tabSes" data-v="ses">Tiempo corrido</button>
+    <button class="tab" id="tabDatos" data-v="datos">Datos e informe</button>
     <button class="tab" id="tabAct" data-v="act">Actividad y pasos</button>
   </div>
 
   <!-- ================= VISTA CRONOMETRO ================= -->
   <div class="vista on" id="vCrono">
-    <div class="grid">
-      <div>
+    <div class="cronoGrid">
+
+      <!-- ---------- columna izquierda: reloj ---------- -->
+      <div class="colIzq">
         <div class="panel">
           <div class="clock idle" id="clock">
             <div class="eyebrow">Midiendo ahora</div>
@@ -312,18 +335,6 @@
               <button class="btn" id="btnSkip" disabled>Saltar paso</button>
               <button class="btn" id="btnCero" disabled>Poner a 0 el crono</button>
             </div>
-          </div>
-
-          <div class="panel-h oculto" id="runnerHead" style="border-top:1px solid var(--line-2)">
-            <span class="rn-head">
-              <span>Tareas del runner</span>
-              <select id="selRunner"></select>
-            </span>
-            <span id="runnerInfo">—</span>
-          </div>
-          <div class="tareas oculto" id="tareas"></div>
-          <div class="strip-foot oculto" id="runnerPie" style="padding:0 22px 16px">
-            Pulsa la tarea que empieza: se guarda sola la anterior y el reloj sigue corriendo.
           </div>
 
           <div class="strip" id="stripPanel">
@@ -356,22 +367,43 @@
             <div class="mini" id="runNota">El reloj corrido sigue contando aunque pauses entre pasos: esa diferencia es el tiempo sin asignar.</div>
           </div>
         </div>
+      </div>
 
-        <div class="panel" id="chipsPanel" style="margin-top:16px">
-          <div class="panel-h">
-            <span>Pasos · clic para corregir el que estás midiendo</span>
-            <span>bucle en naranja · lote en azul</span>
+      <!-- ---------- columna derecha: tareas / pasos y tomas ---------- -->
+      <div class="colDer">
+        <div class="panel" id="panelTareas">
+          <div class="panel-h oculto" id="runnerHead" style="border-top:1px solid var(--line-2)">
+            <span class="rn-head">
+              <span>Tareas del runner</span>
+              <select id="selRunner"></select>
+            </span>
+            <span id="runnerInfo">—</span>
           </div>
-          <div class="chips" id="chips"></div>
+          <div class="tareas oculto" id="tareas"></div>
+          <div class="strip-foot oculto" id="runnerPie" style="padding:0 22px 16px">
+            Pulsa la tarea que empieza: se guarda sola la anterior y el reloj sigue corriendo.
+          </div>
+
+          <div id="chipsPanel" style="display:flex;flex-direction:column;min-height:0;flex:1">
+            <div class="panel-h">
+              <span>Pasos · clic para corregir el que estás midiendo</span>
+              <span>bucle naranja · lote azul</span>
+            </div>
+            <div class="chips" id="chips"></div>
+          </div>
+        </div>
+
+        <div class="panel" id="panelLog">
+          <div class="panel-h"><span>Tomas</span><span id="logCount">0</span></div>
+          <div class="log" id="log"></div>
         </div>
       </div>
 
-      <div class="panel">
-        <div class="panel-h"><span>Tomas</span><span id="logCount">0</span></div>
-        <div class="log" id="log"></div>
-      </div>
     </div>
+  </div>
 
+  <!-- ================= VISTA DATOS E INFORME ================= -->
+  <div class="vista" id="vDatos">
     <div class="panel" style="margin-top:16px">
       <div class="panel-h"><span>Media por paso</span><span>se actualiza en cada toma</span></div>
       <table>
@@ -470,6 +502,8 @@
   </div>
 
   <!-- ================= VISTA ACTIVIDAD ================= -->
+  </div>
+
   <!-- ================= VISTA TIEMPO CORRIDO ================= -->
   <div class="vista" id="vSes">
     <div class="panel">
@@ -963,8 +997,8 @@ function construirInforme(d){
    secreta. NO pongas nunca aqui la "Secret key" ni la "service_role".
    ========================================================================== */
 var NUBE = {
-  url: "https://cvpgmvkoydvqklpmhegt.supabase.co",                     // ej: "https://abcdefgh.supabase.co"
-  key: "sb_publishable_l_eiu9nBsM9tsJsVa0-bHw_CiZcoXZF",                     // ej: "sb_publishable_xxxxxxxx"
+  url: "https://uxdknpyywybsvvmsappt.supabase.co",
+  key: "sb_publishable_IoD2QyMJnnmLBl_g_LS52Q_DtMMwnmD",
   cod: "estudio-principal"     // nombre del cajon donde se guarda todo
 };
 /* ========================================================================== */
@@ -1504,9 +1538,8 @@ var NUBE = {
     ["runnerHead","tareas","runnerPie"].forEach(function(id){
       $(id).className = $(id).className.replace(/\s*oculto/g, "") + (run ? "" : " oculto");
     });
-    ["stripPanel","chipsPanel"].forEach(function(id){
-      $(id).className = $(id).className.replace(/\s*oculto/g, "") + (run ? " oculto" : "");
-    });
+    $("stripPanel").className = $("stripPanel").className.replace(/\s*oculto/g, "") + (run ? " oculto" : "");
+    $("chipsPanel").style.display = run ? "none" : "flex";
     $("btnCaja").style.display = run ? "none" : "";
     $("btnSkip").style.display = run ? "none" : "";
     $("lblLote").textContent = run ? "Cambios" : "Lote";
@@ -1673,16 +1706,31 @@ var NUBE = {
     $("edBody").innerHTML = out;
   }
 
+  // ajusta la pantalla de medicion para que quepa entera, sin scroll
+  function ajustarAlto(){
+    var g = document.querySelector(".cronoGrid");
+    if(!g) return;
+    if(window.innerWidth < 1000 || window.innerHeight < 620){ g.style.height = ""; return; }
+    var top = g.getBoundingClientRect().top + (window.scrollY || 0);
+    var pie = document.querySelector(".foot");
+    var altoPie = pie ? pie.getBoundingClientRect().height + 10 : 0;
+    g.style.height = Math.max(360, window.innerHeight - top - altoPie - 24) + "px";
+  }
+  window.addEventListener("resize", ajustarAlto);
+
   function cambiarVista(v){
     vista = v;
     $("vCrono").className = "vista" + (v === "crono" ? " on" : "");
     $("vSes").className = "vista" + (v === "ses" ? " on" : "");
+    $("vDatos").className = "vista" + (v === "datos" ? " on" : "");
     $("vAct").className = "vista" + (v === "act" ? " on" : "");
     $("tabCrono").className = "tab" + (v === "crono" ? " on" : "");
     $("tabSes").className = "tab" + (v === "ses" ? " on" : "");
+    $("tabDatos").className = "tab" + (v === "datos" ? " on" : "");
     $("tabAct").className = "tab" + (v === "act" ? " on" : "");
     if(v === "act") renderEditor(); else render();
     renderCorrido();
+    setTimeout(ajustarAlto, 0);
   }
 
   /* ---------------- informe ---------------- */
@@ -1790,9 +1838,10 @@ var NUBE = {
     return JSON.parse(JSON.stringify({cfg:o.cfg, actual:o.actual, acts:o.acts}));
   }
   /* ================= GUARDADO EN LINEA (Supabase) ================= */
+  var nubeFallo = false;
   function nubeCfg(){
     if(!DB.cfg.nube) DB.cfg.nube = {url:"", key:"", cod:"", auto:true, ult:null};
-    if(FIJA){
+    if(FIJA && !DB.cfg.nube.manual){
       DB.cfg.nube.url = FIJA.url;
       DB.cfg.nube.key = FIJA.key;
       if(!DB.cfg.nube.cod) DB.cfg.nube.cod = FIJA.cod || "estudio-principal";
@@ -1824,6 +1873,7 @@ var NUBE = {
     n.key = $("fNubeKey").value.trim();
     n.cod = $("fNubeCod").value.trim().toLowerCase().replace(/[^a-z0-9\-_]/g, "-");
     n.auto = $("fNubeAuto").checked;
+    n.manual = true;
     $("fNubeCod").value = n.cod;
     persistYa();
   }
@@ -1860,8 +1910,10 @@ var NUBE = {
         return true;
       })
       .catch(function(e){
-        nubeEstado("sin subir · error", "err");
-        if(!silencioso) toast("No se ha podido subir: " + e.message);
+        nubeFallo = true;
+        nubeEstado("sin subir · error");
+        renderNube();
+        if(!silencioso) avisoNube(e);
         return false;
       });
   }
@@ -1880,8 +1932,10 @@ var NUBE = {
       nubeEstado("combinado con la nube");
       toast("Traído de la nube · " + res.nuevas + " tomas nuevas, " + res.acts + " actividades");
     }).catch(function(e){
-      nubeEstado("sin conexión", "err");
-      toast("No se ha podido traer: " + e.message);
+      nubeFallo = true;
+      nubeEstado("sin conexión");
+      renderNube();
+      avisoNube(e);
     });
   }
 
@@ -1939,6 +1993,27 @@ var NUBE = {
       alert("No se ha podido conectar.\n\n" + e.message +
             "\n\nRevisa que la URL y la clave sean las del proyecto y que hayas creado la tabla 'estudios'.");
     });
+  }
+
+  function avisoNube(e){
+    var m = String(e && e.message || e);
+    var n = nubeCfg(), pistas = [];
+    if(/401|Invalid API key/i.test(m)){
+      pistas.push("La clave no es válida para ese proyecto.");
+      if(!/^sb_publishable_|^eyJ/.test(n.key)) pistas.push("La clave que hay puesta no parece una clave de API: debe empezar por 'sb_publishable_' o por 'eyJ'.");
+      if(n.key.length < 30) pistas.push("Parece cortada: solo tiene " + n.key.length + " caracteres.");
+      if(/\s/.test(n.key)) pistas.push("Tiene espacios o saltos de línea: vuelve a copiarla.");
+      pistas.push("Comprueba que la URL y la clave son del MISMO proyecto.");
+    }else if(/404/.test(m)){
+      pistas.push("No existe la tabla 'estudios'. Vuelve al SQL Editor y ejecuta el bloque de creación.");
+    }else if(/Failed to fetch|NetworkError/i.test(m)){
+      pistas.push("No hay conexión, o la URL del proyecto está mal escrita.");
+    }
+    alert("No se ha podido conectar con la nube.\n\n" + m +
+          (pistas.length ? "\n\nPosible causa:\n· " + pistas.join("\n· ") : "") +
+          "\n\nURL usada: " + (n.url || "(vacía)") +
+          "\nClave: " + (n.key ? n.key.slice(0, 12) + "… (" + n.key.length + " caracteres)" : "(vacía)") +
+          "\n\nPuedes corregirlos abajo, en el panel Guardado en línea, sin volver a subir el archivo.");
   }
 
   var bajando = false;
@@ -2027,7 +2102,7 @@ var NUBE = {
   function renderNube(){
     var n = nubeCfg();
     if(!$("fNubeUrl")) return;
-    if(FIJA){
+    if(FIJA && !nubeFallo){
       $("wrapNubeManual").className = "oculto";
       $("nubeInfo").innerHTML = 'Esta web guarda sola en internet, en el estudio <b>' + esc(n.cod) +
         '</b>. Quien abra el enlace ve los mismos datos, sin escribir ninguna clave.';
@@ -2099,6 +2174,7 @@ var NUBE = {
   /* ---------------- eventos ---------------- */
   $("tabCrono").addEventListener("click", function(){ cambiarVista("crono"); });
   $("tabSes").addEventListener("click", function(){ cambiarVista("ses"); });
+  $("tabDatos").addEventListener("click", function(){ cambiarVista("datos"); });
   $("tabAct").addEventListener("click", function(){ cambiarVista("act"); });
   $("btnSes").addEventListener("click", function(){
     var s = ses();
@@ -2156,8 +2232,12 @@ var NUBE = {
   $("btnSave2").addEventListener("click", guardarTodo);
   $("btnDescargar").addEventListener("click", descargarCopia);
   if($("btnNubeConectar")) $("btnNubeConectar").addEventListener("click", conectarNube);
-  $("btnNubeSubir").addEventListener("click", function(){ leerNubeCampos(); subirNube(false); });
-  $("btnNubeBajar").addEventListener("click", function(){ leerNubeCampos(); traerNube(); });
+  function leerSiVisible(){
+    var w = $("wrapNubeManual");
+    if(w && !w.className.includes("oculto") && $("fNubeUrl").value.trim()) leerNubeCampos();
+  }
+  $("btnNubeSubir").addEventListener("click", function(){ leerSiVisible(); subirNube(false); });
+  $("btnNubeBajar").addEventListener("click", function(){ leerSiVisible(); traerNube(); });
   ["fNubeUrl","fNubeKey","fNubeCod"].forEach(function(id){
     $(id).addEventListener("change", leerNubeCampos);
   });
@@ -2332,6 +2412,8 @@ var NUBE = {
   render();
   restore();
   renderNube();
+  ajustarAlto();
+  setTimeout(ajustarAlto, 200);
   if(nubeLista()){
     setTimeout(function(){
       nubeEstado("bajando…");
@@ -2342,7 +2424,7 @@ var NUBE = {
           nubeEstado("sincronizado");
           if(r.nuevas) toast("Traídas " + r.nuevas + " tomas de la nube");
         }else{ nubeEstado("conectado · estudio vacío"); }
-      }).catch(function(){ nubeEstado("sin conexión · trabajando en local"); });
+      }).catch(function(){ nubeFallo = true; nubeEstado("sin conexión"); renderNube(); });
     }, 900);
   }
   if(window.requestAnimationFrame) requestAnimationFrame(tick);
